@@ -2,6 +2,7 @@ import React from "react";
 import HeroCarousel from "./HeroCarousel";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { toast } from "sonner";
 
 const Hero = () => {
   return (
@@ -19,6 +20,7 @@ const Hero = () => {
           <Button asChild className='mt-8 capitalize'>
             <Link href={"/products"}>all products</Link>
           </Button>
+          <Button onClick={() => toast.success("ciao")}>test</Button>
         </div>
         <HeroCarousel />
       </div>
