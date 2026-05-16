@@ -5,7 +5,13 @@ import Navbar from "@/components/navbar/Navbar";
 import Container from "@/components/global/Container";
 import { cn } from "@/lib/utils";
 import Providers from "./providers";
-
+import {
+  ClerkProvider,
+  Show,
+  SignInButton,
+  SignUpButton,
+  UserButton,
+} from "@clerk/nextjs";
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 const geistSans = Geist({
@@ -43,10 +49,12 @@ export default function RootLayout({
     >
       {/* <body className='min-h-full flex flex-col '> */}
       <body className='min-h-full'>
-        <Providers>
-          <Navbar />
-          <Container className='py-15'>{children}</Container>
-        </Providers>
+        <ClerkProvider>
+          <Providers>
+            <Navbar />
+            <Container className='py-15'>{children}</Container>
+          </Providers>
+        </ClerkProvider>
       </body>
     </html>
   );
