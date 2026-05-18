@@ -5,8 +5,12 @@ import NavSearch from "./NavSearch";
 import DarkMode from "./DarkMode";
 import LinksDropdown from "./LinksDropdown";
 import Container from "../global/Container";
+import UserIcon from "./UserIcon";
+import { auth } from "@clerk/nextjs/server";
 
-const Navbar = () => {
+const Navbar = async () => {
+  let { userId } = await auth();
+  let isAdmin = userId === process.env.ID_USER_ADMIN;
   return (
     <nav className='border-b'>
       <Container className='flex flex-col justify-between items-center sm:flex-row  flex-wrap gap-4 py-8'>
@@ -17,7 +21,8 @@ const Navbar = () => {
         <div className='flex flex-col gap-4 sm:flex-row items-center flex-wrap'>
           <CardButton />
           <DarkMode />
-          <LinksDropdown />
+          <LinksDropdown isAdmin={isAdmin} />
+          <UserIcon />
         </div>
       </Container>
     </nav>

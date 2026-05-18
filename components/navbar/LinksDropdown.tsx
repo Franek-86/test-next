@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 import { navLinks } from "@/utils/navLinks";
 import React from "react";
 import { Button } from "@/components/ui/button";
@@ -13,22 +13,37 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { LuAlignLeft } from "react-icons/lu";
 import Link from "next/link";
-import { Show, SignInButton, SignOutButton, SignUpButton } from "@clerk/nextjs";
+import {
+  auth,
+  Show,
+  SignInButton,
+  SignOutButton,
+  SignUpButton,
+  useUser,
+} from "@clerk/nextjs";
 import { Separator } from "radix-ui";
 import UserIcon from "./UserIcon";
-const LinksDropdown = () => {
+
+const LinksDropdown = ({ isAdmin }: { isAdmin: boolean }) => {
+  // let { userId } = await auth();
+  // let isAdmin = userId === process.env.ID_USER_ADMIN;
+
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className='flex gap-4 max-w-[100px]' asChild>
-        {/* <Button variant='outline'>Open</Button> */}
+      <DropdownMenuTrigger asChild className='flex gap-4 max-w-[100px]'>
         <Button variant='outline' size='icon' className='flex'>
           <LuAlignLeft className='w-6 h-6' />
+          {/* <UserIcon /> */}
         </Button>
       </DropdownMenuTrigger>
-      <UserIcon />
       <DropdownMenuContent className='w-40' sideOffset={20}>
         <Show when='signed-in'>
           {navLinks.map((item) => {
+            {
+              if (item.label === "dashboard" && !isAdmin) {
+                return null;
+              }
+            }
             return (
               <DropdownMenuItem key={item.label}>
                 <Link href={item.href} className='full-width'>
