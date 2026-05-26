@@ -21,8 +21,8 @@ const ShareButton = ({
   name: string;
 }) => {
   const url = process.env.NEXT_PUBLIC_URL_PROD;
-  const shareUrl = `/${url}/products/${productId}`;
-  console.log("tttt12", url);
+  const shareUrl = `${url}/products/${productId}`;
+  console.log("tttt12", shareUrl);
 
   return (
     <Popover>
