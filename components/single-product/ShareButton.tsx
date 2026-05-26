@@ -21,7 +21,7 @@ const ShareButton = ({
   name: string;
 }) => {
   const url = process.env.WEB_URL_PROD;
-  const shareUrl = `${url}/products/${productId}`;
+  const shareUrl = `/${url}/products/${productId}`;
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -29,7 +29,7 @@ const ShareButton = ({
           <LuShare2 />
         </Button>
       </PopoverTrigger>
-      <PopoverContent side='top' align='end' alignOffset={10}>
+      <PopoverContent side='top' align='start' alignOffset={10}>
         <div className='flex items-center justify-center gap-x-8'>
           <XShareButton url={shareUrl} name={name}>
             <XIcon size={32} round />
