@@ -1,6 +1,7 @@
 import { Separator } from "@/components/ui/separator";
 import React from "react";
 import Sidebar from "./Sidebar";
+
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>

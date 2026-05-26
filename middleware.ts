@@ -3,7 +3,12 @@ import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
 
 // export default clerkMiddleware();
-const isPublicRoute = createRouteMatcher(["/", "/products(.*)", "/about"]);
+const isPublicRoute = createRouteMatcher([
+  "/",
+  "/products(.*)",
+  "/about",
+  "/public",
+]);
 const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
 export default clerkMiddleware(async (auth, req) => {
   if (!isPublicRoute(req)) {

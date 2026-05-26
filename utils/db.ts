@@ -4,7 +4,7 @@
 
 import { PrismaClient } from "@/app/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
-PrismaPg;
+
 // import { PrismaPg } from "@prisma/adapter-pg";
 // import { PrismaClient } from "../prisma/generated/client";
 const adapter = new PrismaPg({

@@ -2,6 +2,7 @@ import FavoriteToggleButtons from "@/components/products/FavoriteToggleButtons";
 import AddToCart from "@/components/single-product/AddToCart";
 import Breadcrumbs from "@/components/single-product/Breadcrumbs";
 import ProductRating from "@/components/single-product/ProductRating";
+import ShareButton from "@/components/single-product/ShareButton";
 import { fetchSingleProduct } from "@/utils/actions";
 import { formattedValue } from "@/utils/formattedValue";
 
@@ -31,7 +32,10 @@ const SingleProduct = async ({ params }: { params: { id: string } }) => {
           <div className=''>
             <div className='flex items-center gap-x-2 mb-1'>
               <h2 className='text-2xl font-bold capitalize'>{name}</h2>
-              <FavoriteToggleButtons productId={productId} />
+              <div className='flex gap-x-2 items-center'>
+                <FavoriteToggleButtons productId={productId} />
+                <ShareButton name={name} productId={productId} />
+              </div>
             </div>
             <ProductRating productId={productId} />
             <p>{formattedPrice}</p>

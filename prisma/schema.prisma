@@ -2,20 +2,30 @@ generator client {
   provider = "prisma-client"
   output   = "../app/generated/prisma"
 }
+
 datasource db {
   provider = "postgresql"
 }
 
-
-model  Products {
-  id          String   @id @default(uuid())
+model Products {
+  id          String     @id @default(uuid())
   name        String
   company     String
   description String
-  featured    Boolean  @default(false)
+  featured    Boolean    @default(false)
   image       String
   price       Int
   clerkId     String
-  updatedAt   DateTime @updatedAt
-  createdAt   DateTime @default(now())
+  updatedAt   DateTime   @updatedAt
+  createdAt   DateTime   @default(now())
+  favorites   Favorite[]
+}
+
+model Favorite {
+  id        String   @id @default(uuid())
+  clerkId   String
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  product   Products @relation(fields: [productId], references: [id])
+  productId String
 }
