@@ -20,7 +20,7 @@ const ShareButton = ({
   productId: string;
   name: string;
 }) => {
-  const url = process.env.WEB_URL_DEV;
+  const url = process.env.WEB_URL_PROD;
   const shareUrl = `${url}/products/${productId}`;
   return (
     <Popover>
