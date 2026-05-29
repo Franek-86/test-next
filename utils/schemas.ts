@@ -52,3 +52,24 @@ function validateImage() {
       "not an image",
     );
 }
+
+export const reviewsSchema = z.object({
+  productId: z
+    .string()
+    .refine((val) => val !== "", { message: "product id can't be null" }),
+  authName: z
+    .string()
+    .refine((val) => val !== "", { message: "author name can't be empty" }),
+  authImage: z
+    .string()
+    .refine((val) => val !== "", { message: "author name can't be empty" }),
+  rating: z.coerce
+    .number()
+    .int()
+    .min(0, { message: "rating can't be lower then 0" })
+    .max(5, { message: "rating can't be higher then 5" }),
+  comment: z
+    .string()
+    .min(2, { message: "comment but be of at least 2 characters" })
+    .max(1000, { message: "comment can't exceed the 1000 characters" }),
+});

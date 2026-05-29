@@ -6,6 +6,7 @@ import FavoriteToggleForm from "./FavoriteToggleForm";
 import { CardSignInButton } from "../form/Buttons";
 import { checkFavoriteProduct } from "@/utils/actions";
 import { auth } from "@clerk/nextjs/server";
+import { cn } from "@/lib/utils";
 
 const FavoriteToggleButtons = async ({
   productId,
@@ -18,14 +19,18 @@ const FavoriteToggleButtons = async ({
   console.log("here userId", userId);
   if (!userId) {
     return (
-      <div className='absolute top-[1rem] right-[1rem]'>
+      <div className={cn("p-2", className)}>
         <CardSignInButton />
       </div>
     );
   }
 
   const favoriteId = await checkFavoriteProduct({ productId });
-  return <FavoriteToggleForm productId={productId} favoriteId={favoriteId} />;
+  return (
+    <div className={cn("p-2", className)}>
+      <FavoriteToggleForm productId={productId} favoriteId={favoriteId} />
+    </div>
+  );
 };
 
 export default FavoriteToggleButtons;

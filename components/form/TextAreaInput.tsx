@@ -8,8 +8,13 @@ type TextAreaType = {
 };
 const TextAreaInput = ({ name, title, defaultValue }: TextAreaType) => {
   return (
-    <div className='mt-2'>
-      <Label htmlFor={name}>{title}</Label>
+    <div className='mt-5'>
+      <Label
+        className='capitalize mb-2 font-semibold capitalize'
+        htmlFor={name}
+      >
+        {title}
+      </Label>
       <Textarea name={name} defaultValue={defaultValue} rows={15} />
     </div>
   );

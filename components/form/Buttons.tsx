@@ -9,6 +9,7 @@ import { Button } from "../ui/button";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { getUser } from "@/utils/actions";
 import { TbReload } from "react-icons/tb";
+import { cn } from "@/lib/utils";
 
 type ActionType = "edit" | "delete";
 
@@ -54,10 +55,21 @@ export const FavoriteToggleButton = ({ favorite }: { favorite: boolean }) => {
       type='submit'
       size='icon'
       variant='outline'
-      className='p-2 rounded absolute top-[1rem] right-[1rem]'
+      className='p-2 rounded '
     >
       {pending ? <TbReload /> : favorite ? <FaHeart /> : <FaRegHeart />}
     </Button>
   );
 };
+
+export const ProductSignInButton = () => {
+  return (
+    <SignInButton mode='modal'>
+      <Button variant='default' className='capitalize mt-4'>
+        sign in
+      </Button>
+    </SignInButton>
+  );
+};
+
 export default IconButton;

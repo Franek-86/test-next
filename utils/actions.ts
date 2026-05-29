@@ -4,14 +4,15 @@ import { ActionType } from "./types";
 import { prisma } from "./db";
 import { redirect } from "next/navigation";
 import testImage from "@public/images/test.jpg";
-import { currentUser } from "@clerk/nextjs/server";
-import { imageSchema, productsSchema } from "./schemas";
+import { auth, currentUser, getAuth } from "@clerk/nextjs/server";
+import { imageSchema, productsSchema, reviewsSchema } from "./schemas";
 import { error, log } from "console";
+import { Cart } from "../app/generated/prisma/client";
 import z, { ZodError } from "zod";
 import { checkSchema, checkUser } from "./functions";
 import { deleteImage, uploadImage } from "./supabase";
 import { revalidatePath } from "next/cache";
-
+import { CartModel } from "@/app/generated/prisma/models";
 export const fetchFeaturedProducts = async () => {
   const products = await prisma.products.findMany({
     where: {
@@ -48,6 +49,7 @@ export const fetchSingleProduct = async ({
 
 export const test = async (prevData: any, formData: FormData) => {
   "use server";
+
   const user = await checkUser();
 
   try {
@@ -103,6 +105,14 @@ export const getUser = async () => {
   } else {
     // return redirect("/");
     throw new Error("user not authenticated");
+  }
+};
+export const getAuthUser = async () => {
+  const user = await currentUser();
+  if (user) {
+    return user;
+  } else {
+    return redirect("/");
   }
 };
 
@@ -275,4 +285,257 @@ export const fetchUserFavorites = async () => {
     },
   });
   return favorites;
+};
+
+export const createReviewAction = async (
+  prevState: any,
+  formData: FormData,
+) => {
+  try {
+    const user = await getAuthUser();
+    const data = Object.fromEntries(formData);
+    const validatedData = checkSchema(reviewsSchema, data);
+    await prisma.reviews.create({
+      data: {
+        ...validatedData,
+        clerkId: user.id,
+      },
+    });
+    revalidatePath(`/products/${validatedData.productId}`);
+    return { message: "review created successfully" };
+  } catch (error) {
+    console.log("error", error);
+
+    return { message: "error from create review" };
+  }
+};
+export const fetchProductReviews = async ({
+  productId,
+}: {
+  productId: string;
+}) => {
+  // try {
+  const reviews = await prisma.reviews.findMany({
+    where: {
+      productId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+  return reviews;
+  // } catch (error) {
+  //   return { message: "error while fetching reviews" };
+  // }
+};
+export const fetchRatings = async ({ productId }: { productId: string }) => {
+  const reviews = await prisma.reviews.groupBy({
+    by: ["productId"],
+    _avg: {
+      rating: true,
+    },
+    _count: {
+      rating: true,
+    },
+  });
+  return {
+    value: reviews[0]?._avg?.rating?.toFixed(1) || 0,
+    amount: reviews[0]?._count?.rating || 0,
+  };
+};
+
+export const fetchProductReviewsByUser = async () => {
+  const user = await getUser();
+  const reviews = await prisma.reviews.findMany({
+    where: {
+      clerkId: user.id,
+    },
+    select: {
+      id: true,
+      rating: true,
+      comment: true,
+      product: {
+        select: {
+          name: true,
+          image: true,
+        },
+      },
+    },
+  });
+  return reviews;
+};
+export const deleteReviewAction = async (prevState: { reviewId: string }) => {
+  const user = await getUser();
+  const { reviewId } = prevState;
+  try {
+    await prisma.reviews.delete({
+      where: {
+        clerkId: user.id,
+        id: reviewId,
+      },
+    });
+    revalidatePath("/reviews");
+    return { message: "review deleted successfully" };
+  } catch (error) {
+    return { message: "error deleting review" };
+  }
+};
+
+export const fetchExistingReview = async (
+  userId: string,
+  productId: string,
+) => {
+  return await prisma.reviews.findFirst({
+    where: {
+      clerkId: userId,
+      productId,
+    },
+  });
+};
+
+export const fetchCartItems = async () => {
+  const { userId } = await auth();
+  const cart = await prisma.cart.findFirst({
+    where: {
+      clerkId: userId ?? "",
+    },
+    select: {
+      numItemsInCart: true,
+    },
+  });
+  return cart?.numItemsInCart || 0;
+};
+
+const fetchProduct = async (productId: string) => {
+  const product = await prisma.products.findUnique({
+    where: {
+      id: productId,
+    },
+  });
+  if (!product) {
+    throw new Error("there is no product with such id");
+  }
+};
+const includeOptions = {
+  cartItems: {
+    include: {
+      product: true,
+    },
+  },
+};
+export const fetchOrCreateCart = async ({
+  userId,
+  errorFlag = false,
+}: {
+  userId: string;
+  errorFlag?: boolean;
+}) => {
+  let cart = await prisma.cart.findFirst({
+    where: {
+      clerkId: userId,
+    },
+    include: includeOptions,
+  });
+
+  if (!cart && errorFlag) {
+    throw new Error("There should be a cart");
+  }
+  if (!cart) {
+    cart = await prisma.cart.create({
+      data: {
+        clerkId: userId,
+      },
+      include: includeOptions,
+    });
+  }
+  return cart;
+};
+const createOrUpdateCartItem = async ({
+  productId,
+  cartId,
+  amount,
+}: {
+  productId: string;
+  cartId: string;
+  amount: number;
+}) => {
+  const cartItem = await prisma.cartItem.findFirst({
+    where: {
+      productId,
+      cartId,
+    },
+  });
+
+  if (cartItem) {
+    await prisma.cartItem.updateMany({
+      where: {
+        id: cartItem.id,
+      },
+      data: {
+        amount: cartItem.amount + amount,
+      },
+    });
+  } else {
+    console.log("ee14 cart item creation", cartItem, "amount", amount);
+    await prisma.cartItem.create({
+      data: {
+        cartId,
+        productId,
+        amount,
+      },
+    });
+  }
+};
+export const updateCart = async (cart: Cart) => {
+  const cartItems = await prisma.cartItem.findMany({
+    where: {
+      cartId: cart.id,
+    },
+    include: {
+      product: true,
+    },
+  });
+
+  let numItemsInCart = 0;
+  let totalItemsInCart = 0;
+
+  for (const item of cartItems) {
+    numItemsInCart += item.amount;
+    totalItemsInCart += item.amount * item.product.price;
+  }
+  console.log("zxcv", cart.shipping, cart.taxRate, totalItemsInCart);
+
+  const tax = totalItemsInCart * cart.taxRate;
+  const shipping = numItemsInCart ? cart.shipping : 0;
+  // const shipping = cart.shipping;
+  const cartTotal = totalItemsInCart + shipping + tax;
+  await prisma.cart.update({
+    where: {
+      id: cart.id,
+    },
+    data: {
+      tax,
+      numItemsInCart,
+      cartTotal,
+    },
+  });
+};
+export const addToCartAction = async (prevState: any, formData: FormData) => {
+  const user = await getUser();
+  console.log("e11 user id", user.id);
+
+  try {
+    const productId = formData.get("productId") as string;
+    const amount = Number(formData.get("amount"));
+    await fetchProduct(productId);
+    const cart = await fetchOrCreateCart({ userId: user.id });
+    await createOrUpdateCartItem({ productId, cartId: cart.id, amount });
+    await updateCart(cart);
+  } catch (error) {
+    console.log("error from update cart", error);
+
+    throw new Error("error from add to cart");
+  }
+  redirect("/cart");
+  return { message: "item successfully added" };
 };

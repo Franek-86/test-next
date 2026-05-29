@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import CardButton from "./CardButton";
+import CartButton from "./CartButton";
 import Logo from "./Logo";
 import NavSearch from "./NavSearch";
 import DarkMode from "./DarkMode";
@@ -19,7 +19,7 @@ const Navbar = async () => {
           <NavSearch />
         </Suspense>
         <div className='flex flex-col gap-4 sm:flex-row items-center flex-wrap'>
-          <CardButton />
+          <CartButton />
           <DarkMode />
           <LinksDropdown isAdmin={isAdmin} />
           <UserIcon />

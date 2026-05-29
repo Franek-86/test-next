@@ -58,6 +58,21 @@ const LinksDropdown = ({ isAdmin }: { isAdmin: boolean }) => {
           </DropdownMenuItem>
         </Show>
         <Show when='signed-out'>
+          {navLinks.map((item) => {
+            {
+              if (item.label === "dashboard" && !isAdmin) {
+                return null;
+              }
+            }
+            return (
+              <DropdownMenuItem key={item.label}>
+                <Link href={item.href} className='full-width'>
+                  {item.label}
+                </Link>
+              </DropdownMenuItem>
+            );
+          })}
+          <DropdownMenuSeparator />
           <DropdownMenuItem>
             <SignInButton mode='modal'>
               <Link href='/' className='text-left w-full'>

@@ -27,3 +27,18 @@ export type Products = Prisma.ProductsModel
  * 
  */
 export type Favorite = Prisma.FavoriteModel
+/**
+ * Model Reviews
+ * 
+ */
+export type Reviews = Prisma.ReviewsModel
+/**
+ * Model Cart
+ * 
+ */
+export type Cart = Prisma.CartModel
+/**
+ * Model CartItem
+ * 
+ */
+export type CartItem = Prisma.CartItemModel
