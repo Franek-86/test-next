@@ -494,6 +494,9 @@ export const updateCart = async (cart: Cart) => {
     include: {
       product: true,
     },
+    orderBy: {
+      createdAt: "asc",
+    },
   });
 
   let numItemsInCart = 0;
@@ -520,7 +523,7 @@ export const updateCart = async (cart: Cart) => {
       cartTotal,
     },
   });
-  return temp;
+  return { temp, cartItems };
 };
 export const addToCartAction = async (prevState: any, formData: FormData) => {
   const user = await getUser();

@@ -1,6 +1,4 @@
-import React from "react";
-import { CartItem } from "../../app/generated/prisma/client";
-
+"use client";
 import { FirstColumn, FourthColumn, SecondColumn } from "./CartItemColumns";
 import { Prisma } from "@/app/generated/prisma/browser";
 import { CartItemGetPayload } from "../../app/generated/prisma/models/CartItem";

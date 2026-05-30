@@ -20,6 +20,7 @@ const ThirdColumn = ({ id, quantity }: { id: string; quantity: number }) => {
     await updateCartItem({ id: id, amount: value });
     setAmount(value);
     toast("item amount successfully updated");
+    setLoading(false);
   };
   return (
     <div className='flex flex-col'>
