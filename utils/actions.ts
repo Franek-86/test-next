@@ -509,16 +509,18 @@ export const updateCart = async (cart: Cart) => {
   const shipping = numItemsInCart ? cart.shipping : 0;
   // const shipping = cart.shipping;
   const cartTotal = totalItemsInCart + shipping + tax;
-  await prisma.cart.update({
+  let temp = await prisma.cart.update({
     where: {
       id: cart.id,
     },
+
     data: {
       tax,
       numItemsInCart,
       cartTotal,
     },
   });
+  return temp;
 };
 export const addToCartAction = async (prevState: any, formData: FormData) => {
   const user = await getUser();

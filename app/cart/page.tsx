@@ -9,13 +9,12 @@ fetchCartItems;
 const Cart = async () => {
   const { userId } = await auth();
   if (!userId) redirect("/");
-
   let cart = await fetchOrCreateCart({ userId: userId });
   await updateCart(cart);
 
   return (
     <>
-      {cart.cartItems.length === 0 ? (
+      {cart.numItemsInCart === 0 ? (
         <SectionTitle title='cart is empty' />
       ) : (
         <SectionTitle title='your cart' />
