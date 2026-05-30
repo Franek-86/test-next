@@ -10,7 +10,8 @@ const Cart = async () => {
   const { userId } = await auth();
   if (!userId) redirect("/");
   let cart = await fetchOrCreateCart({ userId: userId });
-  const { temp, cartItems } = await updateCart(cart);
+  await updateCart(cart);
+  // const { temp, cartItems } = await updateCart(cart);
 
   return (
     <>
@@ -21,10 +22,12 @@ const Cart = async () => {
       )}
       <div className='grid grid-4 lg:grid-cols-12 mt-8'>
         <div className='lg:col-span-8'>
-          <CartItemsList cartItems={cartItems} />
+          {/* <CartItemsList cartItems={cartItems} /> */}
+          <CartItemsList cartItems={cart.cartItems} />
         </div>
         <div className='lg:col-span-4 lg:pl-4'>
-          <CartTotals cart={temp} />
+          <CartTotals cart={cart} />
+          {/* <CartTotals cart={temp} /> */}
         </div>
       </div>
     </>
