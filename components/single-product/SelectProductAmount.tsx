@@ -21,7 +21,7 @@ type SelectSingleProductAmountProps = {
 type SelectCartItemAmountProps = {
   mode: Mode.CartItem;
   amount: Number;
-  setAmount: (value: SetStateAction<number>) => Promise<void>;
+  setAmount: (value: number) => Promise<void>;
   isLoading: Boolean;
 };
 

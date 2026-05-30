@@ -18,10 +18,10 @@ const CartItemsList = ({
         const { id, amount } = cartItem;
         const { image, company, name, price, id: productId } = cartItem.product;
         return (
-          <Card className='p-8 flx lg:flex-row gap-x-4 my-4'>
+          <Card key={id} className='p-8 flx lg:flex-row gap-x-4 my-4'>
             <FirstColumn image={image} name={name} />
             <SecondColumn name={name} productId={productId} company={company} />
-            <ThirdColumn id={id} amount={amount} />
+            <ThirdColumn id={id} quantity={amount} />
             <FourthColumn price={price} />
           </Card>
         );

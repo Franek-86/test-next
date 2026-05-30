@@ -541,3 +541,22 @@ export const addToCartAction = async (prevState: any, formData: FormData) => {
   redirect("/cart");
   return { message: "item successfully added" };
 };
+
+export const removeCartItem = async (prevState: any, formData: FormData) => {
+  const user = await getUser();
+  try {
+    const cartId = formData.get("id") as string;
+    const cart = await fetchOrCreateCart({ userId: user.id, errorFlag: true });
+    await prisma.cartItem.delete({
+      where: {
+        id: cartId,
+        cartId: cart.id,
+      },
+    });
+    await updateCart(cart);
+    revalidatePath("/cart");
+    return { message: "item successfully removed" };
+  } catch (error) {
+    return { message: "error removing cart item" };
+  }
+};
