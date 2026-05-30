@@ -5,3 +5,11 @@ export const formattedValue = (test: number | null) => {
     currency: "EUR",
   }).format(value);
 };
+
+export const formattedDate = (date: Date) => {
+  return Intl.DateTimeFormat("en-us", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(date);
+};

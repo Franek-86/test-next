@@ -511,7 +511,7 @@ export const updateCart = async (cart: Cart) => {
   const tax = totalItemsInCart * cart.taxRate;
   const shipping = numItemsInCart ? cart.shipping : 0;
   // const shipping = cart.shipping;
-  const cartTotal = totalItemsInCart + shipping + tax;
+  const orderTotal = totalItemsInCart + shipping + tax;
   let temp = await prisma.cart.update({
     where: {
       id: cart.id,
@@ -520,7 +520,8 @@ export const updateCart = async (cart: Cart) => {
     data: {
       tax,
       numItemsInCart,
-      cartTotal,
+      orderTotal,
+      cartTotal: totalItemsInCart,
     },
   });
   return { temp, cartItems };
@@ -591,4 +592,58 @@ export const updateCartItem = async ({
   } catch (error) {
     return { message: "error updating cart item" };
   }
+};
+
+export const createOrder = async () => {
+  const user = await getUser();
+  try {
+    const cart = await fetchOrCreateCart({ userId: user.id, errorFlag: true });
+    await prisma.order.create({
+      data: {
+        clerkId: user.id,
+        products: cart.numItemsInCart,
+        tax: cart.tax,
+        shipping: cart.shipping,
+        totalOrder: cart.orderTotal,
+        email: user.emailAddresses[0].emailAddress,
+        isPaid: true,
+      },
+    });
+    await prisma.cart.delete({
+      where: {
+        id: cart.id,
+      },
+    });
+    revalidatePath("/cart");
+    return { message: "order successfully created" };
+    // return redirect("/orders");
+  } catch (error) {
+    console.log("asdf", error);
+
+    return { message: "error placing order" };
+  }
+};
+
+export const fetchUserOrders = async () => {
+  const user = await getUser();
+
+  const orders = await prisma.order.findMany({
+    where: {
+      clerkId: user.id,
+      isPaid: true,
+    },
+  });
+  // revalidatePath("/orders");
+  return orders;
+};
+
+export const fetchAdminOrders = async () => {
+  await isAdmin();
+
+  const orders = await prisma.order.findMany({
+    where: {
+      isPaid: true,
+    },
+  });
+  return orders;
 };

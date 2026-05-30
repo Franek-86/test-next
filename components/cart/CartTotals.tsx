@@ -5,8 +5,10 @@ import FormButton from "../form/FormButton";
 import { Separator } from "../ui/separator";
 import { Card, CardContent, CardTitle } from "../ui/card";
 import { formattedValue } from "@/utils/formattedValue";
+import { createOrder } from "@/utils/actions";
+
 const CartTotals = ({ cart }: { cart: Cart }) => {
-  const { shipping, tax, cartTotal, orderTotal } = cart;
+  const { shipping, tax, cartTotal, orderTotal, numItemsInCart } = cart;
   return (
     <Card className='p-8'>
       <CardContent>
@@ -17,6 +19,11 @@ const CartTotals = ({ cart }: { cart: Cart }) => {
           <RowContent label='order total' amount={orderTotal} last />
         </CardTitle>
       </CardContent>
+      {numItemsInCart > 0 && (
+        <FormContainer actionTest={createOrder}>
+          <FormButton text='order' sizeBtn='lg' />
+        </FormContainer>
+      )}
     </Card>
   );
 };
