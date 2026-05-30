@@ -14,7 +14,7 @@ const Cart = async () => {
 
   return (
     <>
-      {cart.numItemsInCart === 0 ? (
+      {cart.cartItems.length === 0 ? (
         <SectionTitle title='cart is empty' />
       ) : (
         <SectionTitle title='your cart' />
