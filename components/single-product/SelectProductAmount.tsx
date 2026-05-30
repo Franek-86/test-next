@@ -37,7 +37,10 @@ const SelectProductAmount = (
       defaultValue={amount.toString()}
       onValueChange={(value) => setAmount(Number(value))}
     >
-      <SelectTrigger className={cartItem ? "w-[100px]" : "w-[150px]"}>
+      <SelectTrigger
+        disabled={cartItem && props.isLoading ? true : false}
+        className={cartItem ? "w-[100px]" : "w-[150px]"}
+      >
         <SelectValue defaultValue={amount.toString()} />
       </SelectTrigger>
       <SelectContent>

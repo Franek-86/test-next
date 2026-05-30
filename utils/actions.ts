@@ -560,3 +560,32 @@ export const removeCartItem = async (prevState: any, formData: FormData) => {
     return { message: "error removing cart item" };
   }
 };
+
+export const updateCartItem = async ({
+  id,
+  amount,
+}: {
+  id: string;
+  amount: number;
+}) => {
+  console.log("this is the amount I'm passing in:", amount);
+
+  const user = await getUser();
+  try {
+    const cart = await fetchOrCreateCart({ userId: user.id, errorFlag: true });
+    await prisma.cartItem.update({
+      where: {
+        id: id,
+        cartId: cart.id,
+      },
+      data: {
+        amount,
+      },
+    });
+    await updateCart(cart);
+    revalidatePath("cart");
+    return { message: "item successfully updated" };
+  } catch (error) {
+    return { message: "error updating cart item" };
+  }
+};
