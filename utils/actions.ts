@@ -12,6 +12,7 @@ import z, { ZodError } from "zod";
 import { checkSchema, checkUser } from "./functions";
 import { deleteImage, uploadImage } from "./supabase";
 import { revalidatePath } from "next/cache";
+
 import { CartModel } from "@/app/generated/prisma/models";
 export const fetchFeaturedProducts = async () => {
   const products = await prisma.products.findMany({
@@ -596,9 +597,18 @@ export const updateCartItem = async ({
 
 export const createOrder = async () => {
   const user = await getUser();
+  let cartId: null | string = null;
+  let orderId: null | string = null;
   try {
     const cart = await fetchOrCreateCart({ userId: user.id, errorFlag: true });
-    await prisma.order.create({
+    cartId = cart.id;
+    await prisma.order.deleteMany({
+      where: {
+        clerkId: user.id,
+        isPaid: false,
+      },
+    });
+    const order = await prisma.order.create({
       data: {
         clerkId: user.id,
         products: cart.numItemsInCart,
@@ -609,19 +619,12 @@ export const createOrder = async () => {
         isPaid: true,
       },
     });
-    await prisma.cart.delete({
-      where: {
-        id: cart.id,
-      },
-    });
-    revalidatePath("/cart");
-    return { message: "order successfully created" };
-    // return redirect("/orders");
+    orderId = order.id;
   } catch (error) {
-    console.log("asdf", error);
-
     return { message: "error placing order" };
   }
+
+  redirect(`/checkout?cartId=${cartId}&orderId=${orderId}`);
 };
 
 export const fetchUserOrders = async () => {

@@ -81,7 +81,7 @@ model Order {
   shipping Int @default(0)
   totalOrder Int @default(0)
   email String
-  isPaid Boolean @default(true)
+  isPaid Boolean @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
