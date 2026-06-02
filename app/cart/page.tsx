@@ -25,7 +25,7 @@ const Cart = async () => {
           {/* <CartItemsList cartItems={cartItems} /> */}
           <CartItemsList cartItems={cart.cartItems} />
         </div>
-        <div className='lg:col-span-4 lg:pl-4'>
+        <div className='lg:col-span-4 lg:pl-4 h-24'>
           <CartTotals cart={cart} />
           {/* <CartTotals cart={temp} /> */}
         </div>

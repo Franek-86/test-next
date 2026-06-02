@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/library/utils";
 import { Button } from "../ui/button";
 import { RiLoader4Fill } from "react-icons/ri";
 import { useFormStatus } from "react-dom";

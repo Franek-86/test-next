@@ -1,7 +1,6 @@
-import { prisma } from "@/utils/db";
+import { prisma } from "@/lib/prisma";
 import { type NextRequest } from "next/server";
 import Stripe from "stripe";
-console.log("ciaoo");
 
 export const POST = async (req: NextRequest) => {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
@@ -28,14 +27,22 @@ export const POST = async (req: NextRequest) => {
   if (!cart || !order) {
     return Response.json(null, { status: 404, statusText: "not found" });
   }
-
+  // enum Tax {
+  //   exclusive = "exclusive",
+  //   inclusive = "inclusive",
+  // }
   const line_items = cart.cartItems.map((item) => {
     return {
+      shipping_cost: 100,
       quantity: item.amount,
       price_data: {
         currency: "eur",
         unit_amount: item.product.price * 100,
-        product_data: { name: item.product.name, images: [item.product.image] },
+        // tax_behavior: Tax.exclusive,
+        product_data: {
+          name: item.product.name,
+          images: [item.product.image],
+        },
       },
     };
   });

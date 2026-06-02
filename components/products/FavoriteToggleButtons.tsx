@@ -6,7 +6,7 @@ import FavoriteToggleForm from "./FavoriteToggleForm";
 import { CardSignInButton } from "../form/Buttons";
 import { checkFavoriteProduct } from "@/utils/actions";
 import { auth } from "@clerk/nextjs/server";
-import { cn } from "@/lib/utils";
+import { cn } from "@/library/utils";
 
 const FavoriteToggleButtons = async ({
   productId,

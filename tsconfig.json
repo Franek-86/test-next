@@ -1,15 +1,17 @@
 {
   "compilerOptions": {
     "module": "ESNext",
+    "moduleResolution": "bundler",
     "target": "ES2023",
-    "ignoreDeprecations": "5.0",
+    "strict": true,
+    "esModuleInterop": true,
+    "ignoreDeprecations": "6.0",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+
     "noEmit": true,
-    "esModuleInterop": true,
-    "moduleResolution": "bundler",
+
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",

@@ -1,19 +1,18 @@
 "use server";
 import { Search } from "lucide-react";
 import { ActionType } from "./types";
-import { prisma } from "./db";
+import { prisma } from "../lib/prisma";
 import { redirect } from "next/navigation";
 import testImage from "@public/images/test.jpg";
 import { auth, currentUser, getAuth } from "@clerk/nextjs/server";
 import { imageSchema, productsSchema, reviewsSchema } from "./schemas";
 import { error, log } from "console";
-import { Cart } from "../app/generated/prisma/client";
+import { Cart } from "@/generated/prisma/client";
 import z, { ZodError } from "zod";
 import { checkSchema, checkUser } from "./functions";
 import { deleteImage, uploadImage } from "./supabase";
 import { revalidatePath } from "next/cache";
 
-import { CartModel } from "@/app/generated/prisma/models";
 export const fetchFeaturedProducts = async () => {
   const products = await prisma.products.findMany({
     where: {
@@ -395,6 +394,8 @@ export const fetchExistingReview = async (
 };
 
 export const fetchCartItems = async () => {
+  console.log(prisma);
+
   const { userId } = await auth();
   const cart = await prisma.cart.findFirst({
     where: {

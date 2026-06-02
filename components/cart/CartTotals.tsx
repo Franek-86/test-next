@@ -1,5 +1,5 @@
 import React from "react";
-import { Cart } from "../../app/generated/prisma/client";
+import { Cart } from "@/generated/prisma/client";
 import FormContainer from "../form/FormContainer";
 import FormButton from "../form/FormButton";
 import { Separator } from "../ui/separator";
@@ -10,7 +10,7 @@ import { createOrder } from "@/utils/actions";
 const CartTotals = ({ cart }: { cart: Cart }) => {
   const { shipping, tax, cartTotal, orderTotal, numItemsInCart } = cart;
   return (
-    <Card className='p-8'>
+    <Card className='p-8 my-4'>
       <CardContent>
         <RowContent label='subtotal' amount={cartTotal} />
         <RowContent label='tax' amount={tax} />

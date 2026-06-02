@@ -1,6 +1,6 @@
 import Stripe from "stripe";
 import { type NextRequest } from "next/server";
-import { prisma } from "@/utils/db";
+import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 
 export const GET = async (req: NextRequest) => {
@@ -27,7 +27,7 @@ export const GET = async (req: NextRequest) => {
       });
     }
   } catch (error) {
-    console.log(error);
+    console.log("this is the error from catch", error);
     return Response.json(null, { status: 500, statusText: "generic error" });
   }
   return redirect("/orders");

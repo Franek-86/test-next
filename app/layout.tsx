@@ -3,7 +3,7 @@ import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import Container from "@/components/global/Container";
-import { cn } from "@/lib/utils";
+import { cn } from "@/library/utils";
 import Providers from "./providers";
 import {
   ClerkProvider,
@@ -18,9 +18,11 @@ const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
+const geist = Geist({
+  subsets: ["latin"],
+});
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
@@ -41,8 +43,9 @@ export default function RootLayout({
       className={cn(
         "h-full",
         "antialiased",
-        geistSans.variable,
-        geistMono.variable,
+        // geistSans.variable,
+        geist.className,
+        geistMono.className,
         "font-sans",
         inter.variable,
       )}

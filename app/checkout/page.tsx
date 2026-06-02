@@ -11,7 +11,7 @@ import axios from "axios";
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string,
 );
-const CheckoutPage = async () => {
+const CheckoutPage = () => {
   const params = useSearchParams();
   const cartId = params.get("cartId");
   const orderId = params.get("orderId");

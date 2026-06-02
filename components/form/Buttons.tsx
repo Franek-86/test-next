@@ -9,7 +9,7 @@ import { Button } from "../ui/button";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { getUser } from "@/utils/actions";
 import { TbReload } from "react-icons/tb";
-import { cn } from "@/lib/utils";
+import { cn } from "@/library/utils";
 
 type ActionType = "edit" | "delete";
 

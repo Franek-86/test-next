@@ -12,8 +12,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^7.3.4",
-    "@prisma/adapter-pg": "^7.8.0",
-    "@prisma/client": "^7.8.0",
+    "@prisma/client": "6.19",
     "@stripe/react-stripe-js": "^6.5.0",
     "@stripe/stripe-js": "^9.7.0",
     "@supabase/supabase-js": "^2.106.1",
@@ -43,16 +42,16 @@
   "devDependencies": {
     "@faker-js/faker": "^10.4.0",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20.19.39",
+    "@types/node": "^20.19.41",
     "@types/pg": "^8.20.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "dotenv": "^17.4.2",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
-    "prisma": "^7.8.0",
+    "prisma": "6.19",
     "tailwindcss": "^4",
-    "tsx": "^4.21.0",
+    "tsx": "^4.22.4",
     "typescript": "^5.9.3"
   }
 }
