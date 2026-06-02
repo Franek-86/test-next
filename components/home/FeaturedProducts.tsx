@@ -1,7 +1,6 @@
 import React from "react";
 import EmptyList from "../global/EmptyList";
 import SectionTitle from "../global/SectionTitle";
-import { prisma } from "@/utils/db";
 
 import ProductsList from "../products/ProductsList";
 import ProductsGrid from "../products/ProductsGrid";
