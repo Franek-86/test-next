@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Products } from "@/app/generated/prisma/browser";
+import { Products } from "@/generated/prisma/browser";
 import { Card, CardContent } from "../ui/card";
 import Link from "next/link";
 import { formattedValue } from "@/utils/formattedValue";
