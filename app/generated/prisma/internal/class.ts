@@ -23,7 +23,7 @@ const config: runtime.GetPrismaClientConfig = {
       "value": "prisma-client"
     },
     "output": {
-      "value": "/Users/macbook/Desktop/store/generated/prisma",
+      "value": "/Users/macbook/Desktop/store/app/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -40,13 +40,14 @@ const config: runtime.GetPrismaClientConfig = {
     "sourceFilePath": "/Users/macbook/Desktop/store/prisma/schema.prisma",
     "isCustomOutput": true
   },
-  "relativePath": "../../prisma",
+  "relativePath": "../../../prisma",
   "clientVersion": "6.19.3",
   "engineVersion": "c2990dca591cba766e3b7ef5d9e8a84796e47ab7",
   "datasourceNames": [
     "db"
   ],
   "activeProvider": "mongodb",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -55,8 +56,8 @@ const config: runtime.GetPrismaClientConfig = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mongodb\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Products {\n  id          String     @id @default(uuid()) @map(\"_id\")\n  name        String\n  company     String\n  description String\n  featured    Boolean    @default(false)\n  image       String\n  price       Int\n  clerkId     String\n  updatedAt   DateTime   @updatedAt\n  createdAt   DateTime   @default(now())\n  favorites   Favorite[]\n  reviews     Reviews[]\n  cartItems   CartItem[]\n}\n\nmodel Favorite {\n  id        String   @id @default(uuid()) @map(\"_id\")\n  clerkId   String\n  updatedAt DateTime @updatedAt\n  createdAt DateTime @default(now())\n  product   Products @relation(fields: [productId], references: [id])\n  productId String\n}\n\nmodel Reviews {\n  id        String   @id @default(uuid()) @map(\"_id\")\n  clerkId   String\n  rating    Int\n  comment   String\n  authImage String\n  authName  String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  product   Products @relation(fields: [productId], references: [id])\n  productId String\n}\n\nmodel Cart {\n  id             String     @id @default(uuid()) @map(\"_id\")\n  clerkId        String\n  numItemsInCart Int        @default(0)\n  taxRate        Float      @default(0.1)\n  tax            Int        @default(0)\n  cartTotal      Int        @default(0)\n  orderTotal     Int        @default(0)\n  shipping       Int        @default(5)\n  cartItems      CartItem[]\n  createdAt      DateTime   @default(now())\n  updateAt       DateTime   @updatedAt\n}\n\nmodel CartItem {\n  id        String   @id @default(uuid()) @map(\"_id\")\n  cart      Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)\n  cartId    String\n  product   Products @relation(fields: [productId], references: [id], onDelete: Cascade)\n  productId String\n  amount    Int\n  createdAt DateTime @default(now())\n  updateAt  DateTime @updatedAt\n}\n\nmodel Order {\n  id         String   @id @default(uuid()) @map(\"_id\")\n  clerkId    String\n  tax        Int      @default(0)\n  products   Int      @default(0)\n  shipping   Int      @default(0)\n  totalOrder Int      @default(0)\n  email      String\n  isPaid     Boolean  @default(false)\n  createdAt  DateTime @default(now())\n  updatedAt  DateTime @updatedAt\n}\n",
-  "inlineSchemaHash": "4aaede3e34e55ca1abf3632a2bdd4fbeb4eed870dba5d08765796033fb7d4266",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"../app/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mongodb\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Products {\n  id          String     @id @default(uuid()) @map(\"_id\")\n  name        String\n  company     String\n  description String\n  featured    Boolean    @default(false)\n  image       String\n  price       Int\n  clerkId     String\n  updatedAt   DateTime   @updatedAt\n  createdAt   DateTime   @default(now())\n  favorites   Favorite[]\n  reviews     Reviews[]\n  cartItems   CartItem[]\n}\n\nmodel Favorite {\n  id        String   @id @default(uuid()) @map(\"_id\")\n  clerkId   String\n  updatedAt DateTime @updatedAt\n  createdAt DateTime @default(now())\n  product   Products @relation(fields: [productId], references: [id])\n  productId String\n}\n\nmodel Reviews {\n  id        String   @id @default(uuid()) @map(\"_id\")\n  clerkId   String\n  rating    Int\n  comment   String\n  authImage String\n  authName  String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  product   Products @relation(fields: [productId], references: [id])\n  productId String\n}\n\nmodel Cart {\n  id             String     @id @default(uuid()) @map(\"_id\")\n  clerkId        String\n  numItemsInCart Int        @default(0)\n  taxRate        Float      @default(0.1)\n  tax            Int        @default(0)\n  cartTotal      Int        @default(0)\n  orderTotal     Int        @default(0)\n  shipping       Int        @default(5)\n  cartItems      CartItem[]\n  createdAt      DateTime   @default(now())\n  updateAt       DateTime   @updatedAt\n}\n\nmodel CartItem {\n  id        String   @id @default(uuid()) @map(\"_id\")\n  cart      Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)\n  cartId    String\n  product   Products @relation(fields: [productId], references: [id], onDelete: Cascade)\n  productId String\n  amount    Int\n  createdAt DateTime @default(now())\n  updateAt  DateTime @updatedAt\n}\n\nmodel Order {\n  id         String   @id @default(uuid()) @map(\"_id\")\n  clerkId    String\n  tax        Int      @default(0)\n  products   Int      @default(0)\n  shipping   Int      @default(0)\n  totalOrder Int      @default(0)\n  email      String\n  isPaid     Boolean  @default(false)\n  createdAt  DateTime @default(now())\n  updatedAt  DateTime @updatedAt\n}\n",
+  "inlineSchemaHash": "c51903b076e44409546e6daea39ab1f1f1510527c33d0f635c40756e7c470437",
   "copyEngine": true,
   "runtimeDataModel": {
     "models": {},

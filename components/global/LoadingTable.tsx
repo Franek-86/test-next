@@ -9,7 +9,6 @@ const LoadingTable = ({ rows = 5 }: { rows?: number }) => {
       </div>
     );
   });
-  console.log("test", rowsArray);
 
   return <div>{rowsArray}</div>;
 };
