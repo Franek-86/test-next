@@ -6,7 +6,6 @@ import { redirect } from "next/navigation";
 import testImage from "@public/images/test.jpg";
 import { auth, currentUser, getAuth } from "@clerk/nextjs/server";
 import { imageSchema, productsSchema, reviewsSchema } from "./schemas";
-import { error, log } from "console";
 import { Cart } from "@/app/generated/prisma/client";
 import z, { ZodError } from "zod";
 import { checkSchema, checkUser } from "./functions";
