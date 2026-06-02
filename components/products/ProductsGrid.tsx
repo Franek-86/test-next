@@ -1,4 +1,4 @@
-import { Products } from "@/generated/prisma/browser";
+import { Products } from "@/app/generated/prisma/browser";
 // import { Card, CardContent } from "../ui/card";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "../ui/button";

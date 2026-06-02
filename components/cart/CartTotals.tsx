@@ -1,5 +1,5 @@
 import React from "react";
-import { Cart } from "@/generated/prisma/client";
+import { Cart } from "@/app/generated/prisma/client";
 import FormContainer from "../form/FormContainer";
 import FormButton from "../form/FormButton";
 import { Separator } from "../ui/separator";

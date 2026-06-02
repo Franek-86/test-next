@@ -1,7 +1,7 @@
 "use client";
 import { FirstColumn, FourthColumn, SecondColumn } from "./CartItemColumns";
 
-import { CartItemGetPayload } from "@/generated/prisma/models/CartItem";
+import { CartItemGetPayload } from "@/app/generated/prisma/models/CartItem";
 import { Card } from "../ui/card";
 import ThirdColumn from "./ThirdColumn";
 
