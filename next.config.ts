@@ -12,11 +12,11 @@ const nextConfig: NextConfig = {
     "/*": ["./node_modules/.prisma/client/**/*"],
   },
   /* config options here */
-  experimental: {
-    serverActions: {
-      bodySizeLimit: "10mb",
-    },
-  },
+  // experimental: {
+  //   serverActions: {
+  //     bodySizeLimit: "10mb",
+  //   },
+  // },
   images: {
     remotePatterns: [
       {
