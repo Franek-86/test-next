@@ -33,7 +33,7 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts",
     "temp/payment.",
-    "next.config.js"
+    "next.config.ts"
   ],
   "exclude": ["node_modules.ts"]
 }
