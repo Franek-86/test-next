@@ -94,6 +94,7 @@ export type ProductsScalarFieldEnum = (typeof ProductsScalarFieldEnum)[keyof typ
 export const FavoriteScalarFieldEnum = {
   id: 'id',
   updatedAt: 'updatedAt',
+  clerkId: 'clerkId',
   createdAt: 'createdAt',
   productId: 'productId'
 } as const
