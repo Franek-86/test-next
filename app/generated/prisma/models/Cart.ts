@@ -372,7 +372,6 @@ export type CartUncheckedCreateInput = {
 }
 
 export type CartUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   clerkId?: Prisma.StringFieldUpdateOperationsInput | string
   numItemsInCart?: Prisma.IntFieldUpdateOperationsInput | number
   taxRate?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -386,7 +385,6 @@ export type CartUpdateInput = {
 }
 
 export type CartUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   clerkId?: Prisma.StringFieldUpdateOperationsInput | string
   numItemsInCart?: Prisma.IntFieldUpdateOperationsInput | number
   taxRate?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -413,7 +411,6 @@ export type CartCreateManyInput = {
 }
 
 export type CartUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   clerkId?: Prisma.StringFieldUpdateOperationsInput | string
   numItemsInCart?: Prisma.IntFieldUpdateOperationsInput | number
   taxRate?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -426,7 +423,6 @@ export type CartUpdateManyMutationInput = {
 }
 
 export type CartUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   clerkId?: Prisma.StringFieldUpdateOperationsInput | string
   numItemsInCart?: Prisma.IntFieldUpdateOperationsInput | number
   taxRate?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -565,7 +561,6 @@ export type CartUpdateToOneWithWhereWithoutCartItemsInput = {
 }
 
 export type CartUpdateWithoutCartItemsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   clerkId?: Prisma.StringFieldUpdateOperationsInput | string
   numItemsInCart?: Prisma.IntFieldUpdateOperationsInput | number
   taxRate?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -578,7 +573,6 @@ export type CartUpdateWithoutCartItemsInput = {
 }
 
 export type CartUncheckedUpdateWithoutCartItemsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   clerkId?: Prisma.StringFieldUpdateOperationsInput | string
   numItemsInCart?: Prisma.IntFieldUpdateOperationsInput | number
   taxRate?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -636,31 +630,7 @@ export type CartSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   _count?: boolean | Prisma.CartCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["cart"]>
 
-export type CartSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  clerkId?: boolean
-  numItemsInCart?: boolean
-  taxRate?: boolean
-  tax?: boolean
-  cartTotal?: boolean
-  orderTotal?: boolean
-  shipping?: boolean
-  createdAt?: boolean
-  updateAt?: boolean
-}, ExtArgs["result"]["cart"]>
 
-export type CartSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  clerkId?: boolean
-  numItemsInCart?: boolean
-  taxRate?: boolean
-  tax?: boolean
-  cartTotal?: boolean
-  orderTotal?: boolean
-  shipping?: boolean
-  createdAt?: boolean
-  updateAt?: boolean
-}, ExtArgs["result"]["cart"]>
 
 export type CartSelectScalar = {
   id?: boolean
@@ -680,8 +650,6 @@ export type CartInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   cartItems?: boolean | Prisma.Cart$cartItemsArgs<ExtArgs>
   _count?: boolean | Prisma.CartCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type CartIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type CartIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $CartPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Cart"
@@ -817,30 +785,6 @@ export interface CartDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
   createMany<T extends CartCreateManyArgs>(args?: Prisma.SelectSubset<T, CartCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Create many Carts and returns the data saved in the database.
-   * @param {CartCreateManyAndReturnArgs} args - Arguments to create many Carts.
-   * @example
-   * // Create many Carts
-   * const cart = await prisma.cart.createManyAndReturn({
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Create many Carts and only return the `id`
-   * const cartWithIdOnly = await prisma.cart.createManyAndReturn({
-   *   select: { id: true },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  createManyAndReturn<T extends CartCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, CartCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Delete a Cart.
    * @param {CartDeleteArgs} args - Arguments to delete one Cart.
    * @example
@@ -905,36 +849,6 @@ export interface CartDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
   updateMany<T extends CartUpdateManyArgs>(args: Prisma.SelectSubset<T, CartUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Update zero or more Carts and returns the data updated in the database.
-   * @param {CartUpdateManyAndReturnArgs} args - Arguments to update many Carts.
-   * @example
-   * // Update many Carts
-   * const cart = await prisma.cart.updateManyAndReturn({
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Update zero or more Carts and only return the `id`
-   * const cartWithIdOnly = await prisma.cart.updateManyAndReturn({
-   *   select: { id: true },
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  updateManyAndReturn<T extends CartUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, CartUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Create or update one Cart.
    * @param {CartUpsertArgs} args - Arguments to update or create a Cart.
    * @example
@@ -952,6 +866,29 @@ export interface CartDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
    * })
    */
   upsert<T extends CartUpsertArgs>(args: Prisma.SelectSubset<T, CartUpsertArgs<ExtArgs>>): Prisma.Prisma__CartClient<runtime.Types.Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+  /**
+   * Find zero or more Carts that matches the filter.
+   * @param {CartFindRawArgs} args - Select which filters you would like to apply.
+   * @example
+   * const cart = await prisma.cart.findRaw({
+   *   filter: { age: { $gt: 25 } }
+   * })
+   */
+  findRaw(args?: Prisma.CartFindRawArgs): Prisma.PrismaPromise<Prisma.JsonObject>
+
+  /**
+   * Perform aggregation operations on a Cart.
+   * @param {CartAggregateRawArgs} args - Select which aggregations you would like to apply.
+   * @example
+   * const cart = await prisma.cart.aggregateRaw({
+   *   pipeline: [
+   *     { $match: { status: "registered" } },
+   *     { $group: { _id: "$country", total: { $sum: 1 } } }
+   *   ]
+   * })
+   */
+  aggregateRaw(args?: Prisma.CartAggregateRawArgs): Prisma.PrismaPromise<Prisma.JsonObject>
 
 
   /**
@@ -1362,26 +1299,6 @@ export type CartCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * The data used to create many Carts.
    */
   data: Prisma.CartCreateManyInput | Prisma.CartCreateManyInput[]
-  skipDuplicates?: boolean
-}
-
-/**
- * Cart createManyAndReturn
- */
-export type CartCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Cart
-   */
-  select?: Prisma.CartSelectCreateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the Cart
-   */
-  omit?: Prisma.CartOmit<ExtArgs> | null
-  /**
-   * The data used to create many Carts.
-   */
-  data: Prisma.CartCreateManyInput | Prisma.CartCreateManyInput[]
-  skipDuplicates?: boolean
 }
 
 /**
@@ -1414,32 +1331,6 @@ export type CartUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
  * Cart updateMany
  */
 export type CartUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * The data used to update Carts.
-   */
-  data: Prisma.XOR<Prisma.CartUpdateManyMutationInput, Prisma.CartUncheckedUpdateManyInput>
-  /**
-   * Filter which Carts to update
-   */
-  where?: Prisma.CartWhereInput
-  /**
-   * Limit how many Carts to update.
-   */
-  limit?: number
-}
-
-/**
- * Cart updateManyAndReturn
- */
-export type CartUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Cart
-   */
-  select?: Prisma.CartSelectUpdateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the Cart
-   */
-  omit?: Prisma.CartOmit<ExtArgs> | null
   /**
    * The data used to update Carts.
    */
@@ -1518,6 +1409,34 @@ export type CartDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Carts to delete.
    */
   limit?: number
+}
+
+/**
+ * Cart findRaw
+ */
+export type CartFindRawArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+   */
+  filter?: runtime.InputJsonValue
+  /**
+   * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
+}
+
+/**
+ * Cart aggregateRaw
+ */
+export type CartAggregateRawArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+   */
+  pipeline?: runtime.InputJsonValue[]
+  /**
+   * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
 }
 
 /**

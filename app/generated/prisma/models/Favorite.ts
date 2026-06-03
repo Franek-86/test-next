@@ -244,7 +244,6 @@ export type FavoriteUncheckedCreateInput = {
 }
 
 export type FavoriteUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   clerkId?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -252,7 +251,6 @@ export type FavoriteUpdateInput = {
 }
 
 export type FavoriteUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   clerkId?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -268,14 +266,12 @@ export type FavoriteCreateManyInput = {
 }
 
 export type FavoriteUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   clerkId?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FavoriteUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   clerkId?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -379,7 +375,6 @@ export type FavoriteCreateOrConnectWithoutProductInput = {
 
 export type FavoriteCreateManyProductInputEnvelope = {
   data: Prisma.FavoriteCreateManyProductInput | Prisma.FavoriteCreateManyProductInput[]
-  skipDuplicates?: boolean
 }
 
 export type FavoriteUpsertWithWhereUniqueWithoutProductInput = {
@@ -417,21 +412,18 @@ export type FavoriteCreateManyProductInput = {
 }
 
 export type FavoriteUpdateWithoutProductInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   clerkId?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FavoriteUncheckedUpdateWithoutProductInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   clerkId?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FavoriteUncheckedUpdateManyWithoutProductInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   clerkId?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -448,23 +440,7 @@ export type FavoriteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   product?: boolean | Prisma.ProductsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["favorite"]>
 
-export type FavoriteSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  clerkId?: boolean
-  updatedAt?: boolean
-  createdAt?: boolean
-  productId?: boolean
-  product?: boolean | Prisma.ProductsDefaultArgs<ExtArgs>
-}, ExtArgs["result"]["favorite"]>
 
-export type FavoriteSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  clerkId?: boolean
-  updatedAt?: boolean
-  createdAt?: boolean
-  productId?: boolean
-  product?: boolean | Prisma.ProductsDefaultArgs<ExtArgs>
-}, ExtArgs["result"]["favorite"]>
 
 export type FavoriteSelectScalar = {
   id?: boolean
@@ -476,12 +452,6 @@ export type FavoriteSelectScalar = {
 
 export type FavoriteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "clerkId" | "updatedAt" | "createdAt" | "productId", ExtArgs["result"]["favorite"]>
 export type FavoriteInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  product?: boolean | Prisma.ProductsDefaultArgs<ExtArgs>
-}
-export type FavoriteIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  product?: boolean | Prisma.ProductsDefaultArgs<ExtArgs>
-}
-export type FavoriteIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   product?: boolean | Prisma.ProductsDefaultArgs<ExtArgs>
 }
 
@@ -614,30 +584,6 @@ export interface FavoriteDelegate<ExtArgs extends runtime.Types.Extensions.Inter
   createMany<T extends FavoriteCreateManyArgs>(args?: Prisma.SelectSubset<T, FavoriteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Create many Favorites and returns the data saved in the database.
-   * @param {FavoriteCreateManyAndReturnArgs} args - Arguments to create many Favorites.
-   * @example
-   * // Create many Favorites
-   * const favorite = await prisma.favorite.createManyAndReturn({
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Create many Favorites and only return the `id`
-   * const favoriteWithIdOnly = await prisma.favorite.createManyAndReturn({
-   *   select: { id: true },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  createManyAndReturn<T extends FavoriteCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, FavoriteCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Delete a Favorite.
    * @param {FavoriteDeleteArgs} args - Arguments to delete one Favorite.
    * @example
@@ -702,36 +648,6 @@ export interface FavoriteDelegate<ExtArgs extends runtime.Types.Extensions.Inter
   updateMany<T extends FavoriteUpdateManyArgs>(args: Prisma.SelectSubset<T, FavoriteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Update zero or more Favorites and returns the data updated in the database.
-   * @param {FavoriteUpdateManyAndReturnArgs} args - Arguments to update many Favorites.
-   * @example
-   * // Update many Favorites
-   * const favorite = await prisma.favorite.updateManyAndReturn({
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Update zero or more Favorites and only return the `id`
-   * const favoriteWithIdOnly = await prisma.favorite.updateManyAndReturn({
-   *   select: { id: true },
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  updateManyAndReturn<T extends FavoriteUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, FavoriteUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Create or update one Favorite.
    * @param {FavoriteUpsertArgs} args - Arguments to update or create a Favorite.
    * @example
@@ -749,6 +665,29 @@ export interface FavoriteDelegate<ExtArgs extends runtime.Types.Extensions.Inter
    * })
    */
   upsert<T extends FavoriteUpsertArgs>(args: Prisma.SelectSubset<T, FavoriteUpsertArgs<ExtArgs>>): Prisma.Prisma__FavoriteClient<runtime.Types.Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+  /**
+   * Find zero or more Favorites that matches the filter.
+   * @param {FavoriteFindRawArgs} args - Select which filters you would like to apply.
+   * @example
+   * const favorite = await prisma.favorite.findRaw({
+   *   filter: { age: { $gt: 25 } }
+   * })
+   */
+  findRaw(args?: Prisma.FavoriteFindRawArgs): Prisma.PrismaPromise<Prisma.JsonObject>
+
+  /**
+   * Perform aggregation operations on a Favorite.
+   * @param {FavoriteAggregateRawArgs} args - Select which aggregations you would like to apply.
+   * @example
+   * const favorite = await prisma.favorite.aggregateRaw({
+   *   pipeline: [
+   *     { $match: { status: "registered" } },
+   *     { $group: { _id: "$country", total: { $sum: 1 } } }
+   *   ]
+   * })
+   */
+  aggregateRaw(args?: Prisma.FavoriteAggregateRawArgs): Prisma.PrismaPromise<Prisma.JsonObject>
 
 
   /**
@@ -1154,30 +1093,6 @@ export type FavoriteCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * The data used to create many Favorites.
    */
   data: Prisma.FavoriteCreateManyInput | Prisma.FavoriteCreateManyInput[]
-  skipDuplicates?: boolean
-}
-
-/**
- * Favorite createManyAndReturn
- */
-export type FavoriteCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Favorite
-   */
-  select?: Prisma.FavoriteSelectCreateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the Favorite
-   */
-  omit?: Prisma.FavoriteOmit<ExtArgs> | null
-  /**
-   * The data used to create many Favorites.
-   */
-  data: Prisma.FavoriteCreateManyInput | Prisma.FavoriteCreateManyInput[]
-  skipDuplicates?: boolean
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.FavoriteIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1222,36 +1137,6 @@ export type FavoriteUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Limit how many Favorites to update.
    */
   limit?: number
-}
-
-/**
- * Favorite updateManyAndReturn
- */
-export type FavoriteUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Favorite
-   */
-  select?: Prisma.FavoriteSelectUpdateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the Favorite
-   */
-  omit?: Prisma.FavoriteOmit<ExtArgs> | null
-  /**
-   * The data used to update Favorites.
-   */
-  data: Prisma.XOR<Prisma.FavoriteUpdateManyMutationInput, Prisma.FavoriteUncheckedUpdateManyInput>
-  /**
-   * Filter which Favorites to update
-   */
-  where?: Prisma.FavoriteWhereInput
-  /**
-   * Limit how many Favorites to update.
-   */
-  limit?: number
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.FavoriteIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1318,6 +1203,34 @@ export type FavoriteDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Limit how many Favorites to delete.
    */
   limit?: number
+}
+
+/**
+ * Favorite findRaw
+ */
+export type FavoriteFindRawArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+   */
+  filter?: runtime.InputJsonValue
+  /**
+   * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
+}
+
+/**
+ * Favorite aggregateRaw
+ */
+export type FavoriteAggregateRawArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+   */
+  pipeline?: runtime.InputJsonValue[]
+  /**
+   * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
 }
 
 /**

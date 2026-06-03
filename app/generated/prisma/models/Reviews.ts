@@ -336,7 +336,6 @@ export type ReviewsUncheckedCreateInput = {
 }
 
 export type ReviewsUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   clerkId?: Prisma.StringFieldUpdateOperationsInput | string
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   comment?: Prisma.StringFieldUpdateOperationsInput | string
@@ -348,7 +347,6 @@ export type ReviewsUpdateInput = {
 }
 
 export type ReviewsUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   clerkId?: Prisma.StringFieldUpdateOperationsInput | string
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   comment?: Prisma.StringFieldUpdateOperationsInput | string
@@ -372,7 +370,6 @@ export type ReviewsCreateManyInput = {
 }
 
 export type ReviewsUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   clerkId?: Prisma.StringFieldUpdateOperationsInput | string
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   comment?: Prisma.StringFieldUpdateOperationsInput | string
@@ -383,7 +380,6 @@ export type ReviewsUpdateManyMutationInput = {
 }
 
 export type ReviewsUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   clerkId?: Prisma.StringFieldUpdateOperationsInput | string
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   comment?: Prisma.StringFieldUpdateOperationsInput | string
@@ -519,7 +515,6 @@ export type ReviewsCreateOrConnectWithoutProductInput = {
 
 export type ReviewsCreateManyProductInputEnvelope = {
   data: Prisma.ReviewsCreateManyProductInput | Prisma.ReviewsCreateManyProductInput[]
-  skipDuplicates?: boolean
 }
 
 export type ReviewsUpsertWithWhereUniqueWithoutProductInput = {
@@ -565,7 +560,6 @@ export type ReviewsCreateManyProductInput = {
 }
 
 export type ReviewsUpdateWithoutProductInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   clerkId?: Prisma.StringFieldUpdateOperationsInput | string
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   comment?: Prisma.StringFieldUpdateOperationsInput | string
@@ -576,7 +570,6 @@ export type ReviewsUpdateWithoutProductInput = {
 }
 
 export type ReviewsUncheckedUpdateWithoutProductInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   clerkId?: Prisma.StringFieldUpdateOperationsInput | string
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   comment?: Prisma.StringFieldUpdateOperationsInput | string
@@ -587,7 +580,6 @@ export type ReviewsUncheckedUpdateWithoutProductInput = {
 }
 
 export type ReviewsUncheckedUpdateManyWithoutProductInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   clerkId?: Prisma.StringFieldUpdateOperationsInput | string
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   comment?: Prisma.StringFieldUpdateOperationsInput | string
@@ -612,31 +604,7 @@ export type ReviewsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   product?: boolean | Prisma.ProductsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["reviews"]>
 
-export type ReviewsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  clerkId?: boolean
-  rating?: boolean
-  comment?: boolean
-  authImage?: boolean
-  authName?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
-  productId?: boolean
-  product?: boolean | Prisma.ProductsDefaultArgs<ExtArgs>
-}, ExtArgs["result"]["reviews"]>
 
-export type ReviewsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  clerkId?: boolean
-  rating?: boolean
-  comment?: boolean
-  authImage?: boolean
-  authName?: boolean
-  createdAt?: boolean
-  updatedAt?: boolean
-  productId?: boolean
-  product?: boolean | Prisma.ProductsDefaultArgs<ExtArgs>
-}, ExtArgs["result"]["reviews"]>
 
 export type ReviewsSelectScalar = {
   id?: boolean
@@ -652,12 +620,6 @@ export type ReviewsSelectScalar = {
 
 export type ReviewsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "clerkId" | "rating" | "comment" | "authImage" | "authName" | "createdAt" | "updatedAt" | "productId", ExtArgs["result"]["reviews"]>
 export type ReviewsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  product?: boolean | Prisma.ProductsDefaultArgs<ExtArgs>
-}
-export type ReviewsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  product?: boolean | Prisma.ProductsDefaultArgs<ExtArgs>
-}
-export type ReviewsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   product?: boolean | Prisma.ProductsDefaultArgs<ExtArgs>
 }
 
@@ -794,30 +756,6 @@ export interface ReviewsDelegate<ExtArgs extends runtime.Types.Extensions.Intern
   createMany<T extends ReviewsCreateManyArgs>(args?: Prisma.SelectSubset<T, ReviewsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Create many Reviews and returns the data saved in the database.
-   * @param {ReviewsCreateManyAndReturnArgs} args - Arguments to create many Reviews.
-   * @example
-   * // Create many Reviews
-   * const reviews = await prisma.reviews.createManyAndReturn({
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Create many Reviews and only return the `id`
-   * const reviewsWithIdOnly = await prisma.reviews.createManyAndReturn({
-   *   select: { id: true },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  createManyAndReturn<T extends ReviewsCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, ReviewsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Delete a Reviews.
    * @param {ReviewsDeleteArgs} args - Arguments to delete one Reviews.
    * @example
@@ -882,36 +820,6 @@ export interface ReviewsDelegate<ExtArgs extends runtime.Types.Extensions.Intern
   updateMany<T extends ReviewsUpdateManyArgs>(args: Prisma.SelectSubset<T, ReviewsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
-   * Update zero or more Reviews and returns the data updated in the database.
-   * @param {ReviewsUpdateManyAndReturnArgs} args - Arguments to update many Reviews.
-   * @example
-   * // Update many Reviews
-   * const reviews = await prisma.reviews.updateManyAndReturn({
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * 
-   * // Update zero or more Reviews and only return the `id`
-   * const reviewsWithIdOnly = await prisma.reviews.updateManyAndReturn({
-   *   select: { id: true },
-   *   where: {
-   *     // ... provide filter here
-   *   },
-   *   data: [
-   *     // ... provide data here
-   *   ]
-   * })
-   * Note, that providing `undefined` is treated as the value not being there.
-   * Read more here: https://pris.ly/d/null-undefined
-   * 
-   */
-  updateManyAndReturn<T extends ReviewsUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, ReviewsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-  /**
    * Create or update one Reviews.
    * @param {ReviewsUpsertArgs} args - Arguments to update or create a Reviews.
    * @example
@@ -929,6 +837,29 @@ export interface ReviewsDelegate<ExtArgs extends runtime.Types.Extensions.Intern
    * })
    */
   upsert<T extends ReviewsUpsertArgs>(args: Prisma.SelectSubset<T, ReviewsUpsertArgs<ExtArgs>>): Prisma.Prisma__ReviewsClient<runtime.Types.Result.GetResult<Prisma.$ReviewsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+  /**
+   * Find zero or more Reviews that matches the filter.
+   * @param {ReviewsFindRawArgs} args - Select which filters you would like to apply.
+   * @example
+   * const reviews = await prisma.reviews.findRaw({
+   *   filter: { age: { $gt: 25 } }
+   * })
+   */
+  findRaw(args?: Prisma.ReviewsFindRawArgs): Prisma.PrismaPromise<Prisma.JsonObject>
+
+  /**
+   * Perform aggregation operations on a Reviews.
+   * @param {ReviewsAggregateRawArgs} args - Select which aggregations you would like to apply.
+   * @example
+   * const reviews = await prisma.reviews.aggregateRaw({
+   *   pipeline: [
+   *     { $match: { status: "registered" } },
+   *     { $group: { _id: "$country", total: { $sum: 1 } } }
+   *   ]
+   * })
+   */
+  aggregateRaw(args?: Prisma.ReviewsAggregateRawArgs): Prisma.PrismaPromise<Prisma.JsonObject>
 
 
   /**
@@ -1338,30 +1269,6 @@ export type ReviewsCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * The data used to create many Reviews.
    */
   data: Prisma.ReviewsCreateManyInput | Prisma.ReviewsCreateManyInput[]
-  skipDuplicates?: boolean
-}
-
-/**
- * Reviews createManyAndReturn
- */
-export type ReviewsCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Reviews
-   */
-  select?: Prisma.ReviewsSelectCreateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the Reviews
-   */
-  omit?: Prisma.ReviewsOmit<ExtArgs> | null
-  /**
-   * The data used to create many Reviews.
-   */
-  data: Prisma.ReviewsCreateManyInput | Prisma.ReviewsCreateManyInput[]
-  skipDuplicates?: boolean
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ReviewsIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1406,36 +1313,6 @@ export type ReviewsUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Reviews to update.
    */
   limit?: number
-}
-
-/**
- * Reviews updateManyAndReturn
- */
-export type ReviewsUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Reviews
-   */
-  select?: Prisma.ReviewsSelectUpdateManyAndReturn<ExtArgs> | null
-  /**
-   * Omit specific fields from the Reviews
-   */
-  omit?: Prisma.ReviewsOmit<ExtArgs> | null
-  /**
-   * The data used to update Reviews.
-   */
-  data: Prisma.XOR<Prisma.ReviewsUpdateManyMutationInput, Prisma.ReviewsUncheckedUpdateManyInput>
-  /**
-   * Filter which Reviews to update
-   */
-  where?: Prisma.ReviewsWhereInput
-  /**
-   * Limit how many Reviews to update.
-   */
-  limit?: number
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ReviewsIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1502,6 +1379,34 @@ export type ReviewsDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Reviews to delete.
    */
   limit?: number
+}
+
+/**
+ * Reviews findRaw
+ */
+export type ReviewsFindRawArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+   */
+  filter?: runtime.InputJsonValue
+  /**
+   * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
+}
+
+/**
+ * Reviews aggregateRaw
+ */
+export type ReviewsAggregateRawArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+   */
+  pipeline?: runtime.InputJsonValue[]
+  /**
+   * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+   */
+  options?: runtime.InputJsonValue
 }
 
 /**
