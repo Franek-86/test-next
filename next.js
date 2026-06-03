@@ -1,5 +1,4 @@
 import { PrismaPlugin } from "@prisma/nextjs-monorepo-workaround-plugin";
-import { webpack } from "next/dist/compiled/webpack/webpack";
 
 module.export = {
   webpack: (config, { server }) => {
