@@ -6,17 +6,13 @@
 
 generator client {
   provider = "prisma-client"
-  output   = "../generated/prisma"
+  output   = "../app/generated/prisma"
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
-
-
-
 model Products {
   id          String     @id @default(uuid()) @map("_id")
   name        String
